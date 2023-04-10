@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import './ItemListContainer.css';
-import ItemList from './ItemList';
+import "./ItemListContainer.css";
+import ItemList from "./ItemList";
 
-
-const ItemListContainer = (props) => {
+const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetch('./products.json');
+      const response = await fetch("./products.json");
       const data = await response.json();
       setProducts(data);
     }
@@ -16,13 +15,10 @@ const ItemListContainer = (props) => {
   }, []);
   return (
     <div className="item-list-container">
-      <section>
-        <h1>{props.greeting}</h1>
-        <h2 className="item-list-container__title">Productos destacados</h2>
-      </section>
+      <h1>{greeting}</h1>
+      <h2 className="item-list-container__title">Productos destacados</h2>
       <ItemList products={products} />
     </div>
-
   );
 };
 
