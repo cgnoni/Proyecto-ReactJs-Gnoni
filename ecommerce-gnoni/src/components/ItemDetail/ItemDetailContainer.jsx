@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ItemDetail from './ItemDetail';
+import { useParams } from 'react-router-dom';
 
 function ItemDetailContainer() {
   const [products, setProducts] = useState([]);
@@ -11,9 +12,12 @@ function ItemDetailContainer() {
       .catch((error) => console.error(error));
   }, []);
 
+  const { id } = useParams();
+  const product = products.find((product) => product.id === id);
+
   return (
     <div>
-      <h2>Detalles de productos</h2>
+      <h1>Detalles de productos</h1>
       {products.map((product) => (
         <ItemDetail key={product.id} product={product} />
       ))}

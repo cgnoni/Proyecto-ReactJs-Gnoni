@@ -1,14 +1,12 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { Link } from 'react-router-dom';
 
-function Item(props, {product}) {
+
+function Item(props) {
   return (
     <div>
       <Card style={{ width: "18rem" }}>
-        <Link to={`/product/${product.id}`}>
-          <Card.Img variant="top" src={props.product.imagen} />
-        </Link>
+        <Card.Img variant="top" src={props.product.imagen} />
         <Card.Body>
           <Card.Title>{props.product.nombre}</Card.Title>
           <Card.Text>
