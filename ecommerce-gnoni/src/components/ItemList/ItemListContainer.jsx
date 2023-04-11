@@ -2,15 +2,23 @@ import React, { useEffect, useState } from "react";
 import "./ItemListContainer.css";
 import ItemList from "./ItemList.jsx";
 import { mockFetch } from "../mockFetch/mockFetch";
+import { useParams } from "react-router-dom";
 
 const ItemListContainer = ({ greeting }) => {
   const [productos, setProductos] = useState([]);
+  const { cid } = useParams();
 
   useEffect(() => {
-    mockFetch()
-      .then((resp) => setProductos(resp))
-      .catch((err) => console.log(err));
-  }, []);
+    if (cid) {
+      mockFetch()
+        .then(resp =>
+          setProductos(resp.filter(prod => prod.categoria === cid)))
+        .catch(err => console.log(err));
+    } else
+      mockFetch()
+        .then(resp => setProductos(resp))
+        .catch(err => console.log(err));
+  }, [cid]);
 
   return (
     <div className="item-list-container">

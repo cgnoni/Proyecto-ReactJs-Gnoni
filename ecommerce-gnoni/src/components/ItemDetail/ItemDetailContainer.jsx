@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ItemDetail from "./ItemDetail";
 import { useParams } from "react-router-dom";
 import { mockFetch } from "../mockFetch/mockFetch";
 
 function ItemDetailContainer() {
-  const [products, setProducts] = useState([]);
+  const [producto, setProducto] = useState({});
+  const { pid } = useParams();
 
   useEffect(() => {
-    mockFetch("1")
-      .then(resp => console.log(resp))
-      .catch((err)=> console.log(err))
+    mockFetch(pid)
+      .then(resp => setProducto(resp))
+      .catch(err => console.log(err));
   }, []);
 
-
-  // const { id } = useParams();
-  // const product = products.find((product) => product.id === id);
-
-  return <ItemDetail product={products} />;
-
+  return <ItemDetail producto={producto} />;
 }
 
 export default ItemDetailContainer;

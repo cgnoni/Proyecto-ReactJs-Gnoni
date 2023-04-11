@@ -1,21 +1,24 @@
 import ItemCount from "../ItemCount/ItemCount";
 
+const onAdd = (cantidad) => {
+  console.log(cantidad)
+}
 
-function ItemDetail(props) {
+const ItemDetail = ({producto}) => {
   return (
     <div className="row">
-      <div className="col-12">Detalle del producto</div>
-      <div className="col-6">
-        <img src={props.product.imagen} />
-        <h2>{props.product.nombre}</h2>
-        <p>{props.product.descripcion}</p>
+      <h1 className="col-12">Detalle del producto</h1>
+      <div className="col-7">
+        <img src={producto.imagen} />
+        <h2>{producto.nombre}</h2>
+        <p>{producto.descripcion}</p>
         <br />
-        <h3>Precio: {props.product.precio}</h3>
+        <h3>Precio: {producto.precio}</h3>
         <br />
-        <h4>Stock: {props.product.stock}</h4>
+        <h4>Stock: {producto.stock}</h4>
       </div>
-      <div className="col-6">
-        <ItemCount />
+      <div className="col-5">
+        <ItemCount initial={1} stock={20} onAdd={onAdd} />
       </div>
     </div>
   );

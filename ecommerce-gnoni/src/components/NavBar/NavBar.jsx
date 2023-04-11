@@ -18,18 +18,23 @@ const NavBar = () => {
       <nav className="navbar">
         <ul className="nav-container">
           <li className="nav-item">
-            <Link className="nav-link" to="/category/1">
-              Productos
+            <Link className="nav-link" to="/categoria/Varitas">
+              Varitas
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/category/2">
-              <a href="/">Blog</a>
+            <Link className="nav-link" to="/categoria/Bufandas">
+              Bufandas
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/category/1">
-              <a href="/">Contacto</a>
+            <Link className="nav-link" to="/categoria/Varios">
+              Varios
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/contacto">
+              Contacto
             </Link>
           </li>
           <li className="nav-item">

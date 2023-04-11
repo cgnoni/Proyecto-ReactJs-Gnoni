@@ -1,10 +1,7 @@
-import React from "react";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import ItemListContainer from "./components/ItemList/ItemListContainer.jsx";
 import ItemDetailContainer from "./components/ItemDetail/ItemDetailContainer.jsx";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.min.js";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 
 
@@ -15,7 +12,10 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<ItemListContainer greeting = "Bienvenidos!" />} />
-          <Route path="product/:id" element={<ItemDetailContainer />} />
+          <Route path="/categoria/:cid" element={<ItemListContainer />} />
+          <Route path="/detail/:pid" element={<ItemDetailContainer />} />
+
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
     </div>

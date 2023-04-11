@@ -1,9 +1,9 @@
-import React from "react";
 import { Button, Card, CardGroup } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import { Link } from "react-router-dom";
 
-function Item({producto}) {
+function Item({ producto }) {
   return (
     <CardGroup className="m-3">
       <Card style={{ width: "18rem" }}>
@@ -14,7 +14,9 @@ function Item({producto}) {
             <br />
             Precio: $ {producto.precio}
           </Card.Text>
-          <Button variant="info">Detalles</Button>
+          <Link to={"/detail"}>
+            <Button variant="info">Detalles</Button>
+          </Link>
         </Card.Body>
       </Card>
     </CardGroup>
