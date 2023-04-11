@@ -1,22 +1,23 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Button, Card, CardGroup } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 
-
-function Item(props) {
+function Item({producto}) {
   return (
-    <div>
+    <CardGroup className="m-3">
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={props.product.imagen} />
+        <Card.Img variant="top" src={producto.imagen} />
         <Card.Body>
-          <Card.Title>{props.product.nombre}</Card.Title>
+          <Card.Title>{producto.nombre}</Card.Title>
           <Card.Text>
-            {props.product.descripcion}
             <br />
-            Price: {props.product.precio}
+            Precio: $ {producto.precio}
           </Card.Text>
+          <Button variant="info">Detalles</Button>
         </Card.Body>
       </Card>
-    </div>
+    </CardGroup>
   );
 }
 

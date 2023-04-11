@@ -2,7 +2,7 @@ import React from "react";
 
 import { FaShoppingCart } from "react-icons/fa";
 
-import "./styles/CartWidget.css";
+import "./CartWidget.css";
 
 const CartWidget = () => {
   return (
