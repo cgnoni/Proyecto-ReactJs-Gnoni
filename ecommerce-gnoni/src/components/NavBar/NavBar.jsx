@@ -1,8 +1,6 @@
 import React from "react";
 import CartWidget from "../CartWidget/CartWidget";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 import "./NavBar.css";
 
@@ -33,12 +31,12 @@ const NavBar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/contacto">
+            <Link className="nav-link" to="/contact">
               Contacto
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/cart">
+            <Link className="nav-link" to="/cartContainer">
               <CartWidget />
             </Link>
           </li>

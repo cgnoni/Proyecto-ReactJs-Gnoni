@@ -1,5 +1,5 @@
 import React from "react";
-import Item from "./Item";
+import Item from "../Item/Item";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 

@@ -1,10 +1,19 @@
+import { useState } from "react";
+import { useCartContext } from "../../Context/CartContext";
+import { CartButtons } from "../CartButtons/CartButtons";
 import ItemCount from "../ItemCount/ItemCount";
 
-const onAdd = (cantidad) => {
-  console.log(cantidad)
-}
-
 const ItemDetail = ({producto}) => {
+  const [goToCart, setGoToCart] = useState(false);
+
+  const { addToCart } = useCartContext();
+
+  const onAdd = (cantidad) => {
+    console.log(cantidad);
+    addToCart({ ...product, quantity: cantidad });
+    setGoToCart(true);
+  };
+
   return (
     <div className="row">
       <h1 className="col-12">Detalle del producto</h1>
@@ -18,7 +27,10 @@ const ItemDetail = ({producto}) => {
         <h4>Stock: {producto.stock}</h4>
       </div>
       <div className="col-5">
-        <ItemCount initial={1} stock={20} onAdd={onAdd} />
+      {goToCart ? (
+            <CartButtons />
+          ) : (
+        <ItemCount initial={1} stock={20} onAdd={onAdd} />)}
       </div>
     </div>
   );
