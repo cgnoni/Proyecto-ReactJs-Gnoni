@@ -1,10 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { CiCircleRemove } from "react-icons/ci";
 import { GrAddCircle } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import { Form } from "react-bootstrap";
 
 const CartContainer = () => {
+  const [formOrden, setFormOrden] = useState({
+    nombre: "",
+    numero: "",
+    email: "",
+  });
+
   const {
     cart,
     removerProducto,
@@ -13,6 +21,34 @@ const CartContainer = () => {
     decrement,
     totalPrice,
   } = useContext(CartContext);
+
+  const handleComprar = (event) => {
+    event.preventDefault();
+
+    const orden = {
+      comprador: formOrden,
+      productos: cart.map(({ id, nombre, precio }) => ({ id, nombre, precio })),
+      total: totalPrice(),
+    };
+
+    const db = getFirestore();
+    const queryCollection = collection(db, "ordenes");
+
+    addDoc(queryCollection, orden)
+      .then(({ id }) => console.log({ id }))
+      .catch((resp) => console.log(resp))
+      .finally(() => vaciarCarrito());
+    alert("¡Felicidades por tu compra!");
+  };
+
+  const handleOnChange = (event) => {
+    console.log(event.target.name);
+    console.log(event.target.value);
+    setFormOrden({
+      ...formOrden,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   return (
     <>
@@ -52,9 +88,58 @@ const CartContainer = () => {
             ))}
           </div>
           <h3>
-            Total: <br /> ${totalPrice()}
+            Total: <br /> $ {totalPrice()}
           </h3>
-          <button onClick={vaciarCarrito()}>Vaciar carrito</button>
+          <button onClick={vaciarCarrito}>Vaciar carrito</button>
+          <br />
+          <br />
+          <Form onSubmit={handleComprar}>
+            <Form.Group controlId="formName">
+              <Form.Control
+                type="text"
+                name="nombre"
+                placeholder="Ingrese su nombre y apellido"
+                onChange={handleOnChange}
+                value={formOrden.nombre}
+                required
+              />
+            </Form.Group>
+            <br />
+            <Form.Group>
+              <Form.Control
+                type="text"
+                name="numero"
+                placeholder="Ingrese su numero de contacto"
+                onChange={handleOnChange}
+                value={formOrden.numero}
+                required
+              />
+            </Form.Group>
+            <br />
+            <Form.Group>
+              <Form.Control
+                type="text"
+                name="email"
+                placeholder="Ingrese su email"
+                onChange={handleOnChange}
+                value={formOrden.email}
+                required
+              />
+            </Form.Group>
+            <br />
+            <Form.Group>
+              <Form.Control
+                type="text"
+                name="email"
+                placeholder="Repita su email"
+                onChange={handleOnChange}
+                value={formOrden.email}
+                required
+              />
+            </Form.Group>
+            <br />
+            <button>Generar Orden</button>
+          </Form>
         </div>
       ) : (
         <div>

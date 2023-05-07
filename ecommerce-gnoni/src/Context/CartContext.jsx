@@ -1,6 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { mockFetch } from "../components/mockFetch/mockFetch";
-
+import { createContext, useContext, useState } from "react";
 
 export const CartContext = createContext([]);
 
@@ -8,13 +6,6 @@ export const useCartContext = () => useContext(CartContext);
 
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [productos, setProductos] = useState([]);
-
-  useEffect(() => {
-    mockFetch()
-      .then((resp) => setProductos(resp))
-      .catch((err) => console.log(err));
-  }, []);
 
   const addToCart = (nuevoProducto) => {
     const existingProducto = cart.find((prod) => prod.id === nuevoProducto.id);
@@ -40,12 +31,16 @@ const CartProvider = ({ children }) => {
 
   const totalPrice = () => {
     return cart.reduce(
-      (precioTotal, objProd) => precioTotal += (objProd.quantity * objProd.price), 0);
+      (precioTotal, objProd) =>
+        (precioTotal += objProd.quantity * objProd.precio),
+      0
+    );
   };
-  
+
   const totalProductos = () => {
     return cart.reduce(
-      (totalProductos, objProd) => totalProductos + objProd.quantity, 0
+      (totalProductos, objProd) => totalProductos + objProd.quantity,
+      0
     );
   };
 

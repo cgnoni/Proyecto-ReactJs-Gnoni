@@ -15,14 +15,14 @@ const ItemDetail = ({producto}) => {
   };
 
   return (
-    <div className="row">
+    <div className="row-center">
       <h1 className="col-12">Detalle del producto</h1>
       <div className="col-7">
         <img src={producto.imagen} />
         <h2>{producto.nombre}</h2>
         <p>{producto.descripcion}</p>
         <br />
-        <h3>Precio: {producto.precio}</h3>
+        <h3>Precio: $ {producto.precio}</h3>
         <br />
         <h4>Stock: {producto.stock}</h4>
       </div>

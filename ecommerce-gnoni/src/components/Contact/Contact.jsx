@@ -45,7 +45,7 @@ function ContactForm() {
           required
         />
       </Form.Group>
-
+      <br />
       <Form.Group controlId="formEmail">
         <Form.Label>Email</Form.Label>
         <Form.Control
@@ -57,7 +57,7 @@ function ContactForm() {
           required
         />
       </Form.Group>
-
+      <br />
       <Form.Group controlId="formMessage">
         <Form.Label>Mensaje</Form.Label>
         <Form.Control
@@ -66,11 +66,11 @@ function ContactForm() {
           name="message"
           value={formData.message}
           onChange={handleInputChange}
-          placeholder="Escribe tu mensaje"
+          placeholder="Dejanos tu mensaje"
           required
         />
       </Form.Group>
-
+      <br />
       <Button variant="primary" type="submit" disabled={formSubmitted}>
         {formSubmitted ? "Enviado" : "Enviar"}
       </Button>

@@ -7,7 +7,6 @@ import Loading from "../Loading/Loading"
 
 const ItemListContainer = ({ greeting }) => {
   const [productos, setProductos] = useState([]);
-  // const { search } = useState("");
   const { cid } = useParams();
   const [isLoading, setIsLoading] = useState(true)
 
