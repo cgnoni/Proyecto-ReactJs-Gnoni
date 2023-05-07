@@ -4,15 +4,11 @@
 
 ## Características principales
 
-- **Catálogo de productos**: El proyecto cuenta con un amplio catálogo de productos de Harry Potter, que incluye elementos como varitas, libros, ropa, accesorios y más. Los usuarios pueden explorar fácilmente los productos disponibles y obtener información detallada sobre cada uno de ellos.
+- **Catálogo de productos**: El proyecto cuenta con un catálogo de productos de Harry Potter, que incluye elementos como varitas, ropay accesorios. Los usuarios pueden explorar fácilmente los productos disponibles y obtener información detallada sobre cada uno de ellos.
 
-- **Búsqueda y filtrado**: Los usuarios pueden realizar búsquedas específicas utilizando palabras clave y filtrar los productos por categorías, precios, popularidad, etc. Esto les permite encontrar rápidamente los productos deseados y facilita la navegación dentro del catálogo.
+- **Búsqueda y filtrado**: Los usuarios pueden filtrar los productos por categorías. Esto les permite encontrar rápidamente los productos deseados y facilita la navegación dentro del catálogo.
 
 - **Carrito de compras**: El proyecto ofrece un carrito de compras funcional donde los usuarios pueden agregar productos, ajustar las cantidades y eliminar artículos. El carrito de compras también muestra el subtotal y el total de la compra, lo que brinda una visión clara de los productos seleccionados y su costo acumulado.
-
-- **Proceso de pago**: Los usuarios pueden completar el proceso de pago utilizando métodos de pago seguros. Se proporciona una interfaz intuitiva para ingresar la información de envío y facturación, y se confirma la compra con un resumen detallado de la orden.
-
-- **Autenticación de usuarios**: Los usuarios tienen la opción de crear una cuenta y autenticarse para acceder a funciones adicionales, como guardar productos en una lista de deseos, revisar el historial de pedidos y recibir notificaciones sobre promociones y nuevos productos.
 
 ## Configuración del proyecto
 
