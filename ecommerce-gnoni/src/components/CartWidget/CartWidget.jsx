@@ -1,17 +1,17 @@
 import React from "react";
-import { CartContext, useCartContext } from "../../Context/CartContext";
+import { CartContext, useCartContext } from "../../context/CartContext";
 import "./CartWidget.css";
 import { FaShoppingCart } from "react-icons/fa";
 
 
 
 const CartWidget = () => {
-  const { totalProductos } = useCartContext(CartContext)
+  const { totalProductos } = useCartContext(CartContext);
   return (
-    <div className="cart-widget">
+    <button className="cart-widget">
       <FaShoppingCart size="50px" color="black" />
       <div className="qty-display">{totalProductos()}</div>
-    </div>
+    </button>
   );
 };
 

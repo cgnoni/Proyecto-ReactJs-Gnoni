@@ -1,42 +1,54 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ItemListContainer.css";
 import ItemList from "../ItemList/ItemList.jsx";
-//import { mockFetch } from "../mockFetch/mockFetch";
 import { useParams } from "react-router-dom";
-import { CartContext } from "../../Context/CartContext";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import Loading from "../Loading/Loading"
 
 const ItemListContainer = ({ greeting }) => {
-  const { productos } = useContext(CartContext);
-  const { tId } = useParams();
+  const [productos, setProductos] = useState([]);
+  // const { search } = useState("");
+  const { cid } = useParams();
+  const [isLoading, setIsLoading] = useState(true)
 
-  // useEffect(() => {
+  useEffect(() => {
+    const db = getFirestore();
+    const queryCollection = collection(db, 'productos');
+
+    if (cid) {
+      const queryFilter = query(queryCollection, where('categoria', '==', cid))
+
+      getDocs(queryFilter)
+        .then (resp => setProductos(resp.docs.map(producto => ({id: producto.id, ...producto.data()}))))
+        .catch (err => console.log(err))
+        .finally(() => setIsLoading(false))
+
+    } else
+      getDocs(queryCollection)
+        .then (resp => setProductos(resp.docs.map(producto => ({id: producto.id, ...producto.data() }))))
+        .catch (err => console.log(err))
+        .finally(() => setIsLoading(false))
+  }, [cid]);
+
+  // const FiltradoProducto = productos.filter((prod) => {
   //   if (cid) {
-  //     mockFetch()
-  //       .then(resp =>
-  //         setProductos(resp.filter(prod => prod.categoria === cid)))
-  //       .catch(err => console.log(err));
-  //   } else
-  //     mockFetch()
-  //       .then(resp => setProductos(resp))
-  //       .catch(err => console.log(err));
-  // }, [cid]);
-
-  const filtradoProducto = productos.filter((prod) => {
-    if (tId) {
-      return prod.categoria === tId;
-    } else if (search) {
-      return prod.nombre.toLowerCase().includes(search.toLowerCase());
-    } else {
-      return [];
-    }
-  });
+  //     return prod.categoria === cid;
+  //   } else if (search) {
+  //     return prod.nombre.toLowerCase().includes(search.toLowerCase());
+  //   } else {
+  //     return [];
+  //   }
+  // });
 
   return (
     <div className="item-list-container">
       <h1>{greeting}</h1>
       <h2 className="item-list-container__title">Productos destacados</h2>
       <div className="d-flex flex-wrap justify-content-center">
-        <ItemList productos={filtradoProducto} />
+        {isLoading ?
+        <Loading />
+      : <ItemList productos={productos} />
+      }
       </div>
     </div>
   );

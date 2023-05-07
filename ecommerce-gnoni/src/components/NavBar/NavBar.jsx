@@ -1,11 +1,13 @@
 import React from "react";
 import CartWidget from "../CartWidget/CartWidget";
 import { Link } from "react-router-dom";
-
+import { useCartContext } from "../../context/CartContext";
 import "./NavBar.css";
 
+
 const NavBar = () => {
-  const brand = "./src/assets/harry-potter-vector-logo.png";
+  const brand = "../src/assets/harry-potter-vector-logo.png";
+  const { totalProductos } = useCartContext();
   return (
     <header className="header">
       <Link className="navbar-brand" to="/">

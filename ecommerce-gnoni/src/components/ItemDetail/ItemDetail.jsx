@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCartContext } from "../../Context/CartContext";
+import { useCartContext } from "../../context/CartContext";
 import { CartButtons } from "../CartButtons/CartButtons";
 import ItemCount from "../ItemCount/ItemCount";
 
@@ -10,7 +10,7 @@ const ItemDetail = ({producto}) => {
 
   const onAdd = (cantidad) => {
     console.log(cantidad);
-    addToCart({ ...product, quantity: cantidad });
+    addToCart({ ...producto, quantity: cantidad });
     setGoToCart(true);
   };
 

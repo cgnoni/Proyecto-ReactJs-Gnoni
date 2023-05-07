@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
-import { CartContext } from "../../Context/CartContext";
+import { CartContext } from "../../context/CartContext";
 import { CiCircleRemove } from "react-icons/ci";
 import { GrAddCircle } from "react-icons/gr";
-
+import { Link } from "react-router-dom";
 
 const CartContainer = () => {
   const {
-    productos,
-    removeFromCart,
-    clearCart,
+    cart,
+    removerProducto,
+    vaciarCarrito,
     increment,
     decrement,
     totalPrice,
@@ -20,51 +20,48 @@ const CartContainer = () => {
         <h1>Carrito de compras</h1>
       </div>
 
-      {productos.length > 0 ? (
+      {cart.length > 0 ? (
         <div>
           <div>
-            {productos.map((item) => (
-              <div key={item.id}>
+            {cart.map((producto) => (
+              <div key={producto.id}>
                 <div>
-                  <img src={item.imagen} alt={item.nombre} />
-                  <h2>{item.nombre}</h2>
-                  <p>{item.precio}</p>
+                  <img src={producto.imagen} alt={producto.nombre} />
+                  <h2>{producto.nombre}</h2>
+                  <p>{producto.precio}</p>
                   <button
-                    onClick={() => decrement(item.id)}
-                    disabled={item.quantity === 1 ? true : false}
+                    onClick={() => decrement(producto.id)}
+                    disabled={producto.quantity === 1 ? true : false}
                   >
                     <CiCircleRemove />
                   </button>
-                  <span>{item.quantity}</span>
+                  <span>{producto.quantity}</span>
                   <button
-                    onClick={() => increment(item.id)}
-                    disabled={item.quantity === item.stock ? true : false}
+                    onClick={() => increment(producto.id)}
+                    disabled={
+                      producto.quantity === producto.stock ? true : false
+                    }
                   >
                     <GrAddCircle />
                   </button>
-                  <span onClick={() => removeFromCart(item.id)}>
+                  <span onClick={() => removerProducto(producto.id)}>
                     <button>Remover producto</button>
                   </span>
                 </div>
               </div>
             ))}
           </div>
-          <div>
-            <button onClick={() => clearCart()}>Clear cart</button>
-
-            <div>
-              <p>
-                Total: <br /> ${totalPrice()}
-              </p>
-            </div>
-          </div>
+          <h3>
+            Total: <br /> ${totalPrice()}
+          </h3>
+          <button onClick={vaciarCarrito()}>Vaciar carrito</button>
         </div>
       ) : (
         <div>
           <div>
-            <p>Your cart is empty </p>
+            <p>No hay productos en tu carrito !</p>
             <Link to="/">
-              <button className="btn btn-shopping">Go shopping</button>
+              <button className="btn btn-shopping">Volver al inicio</button>
             </Link>
           </div>
         </div>

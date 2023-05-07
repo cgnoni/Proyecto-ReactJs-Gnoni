@@ -6,7 +6,7 @@ export const CartContext = createContext([]);
 
 export const useCartContext = () => useContext(CartContext);
 
-const CartProvider = ({ props }) => {
+const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [productos, setProductos] = useState([]);
 
@@ -34,59 +34,58 @@ const CartProvider = ({ props }) => {
     }
   };
 
-  const removeFromCart = (id) => {
+  const removerProducto = (id) => {
     setCart(cart.filter((prod) => prod.id !== id));
   };
 
   const totalPrice = () => {
     return cart.reduce(
-      (acc, current) => acc + current.quantity * current.price,
-      0
-    );
+      (precioTotal, objProd) => precioTotal += (objProd.quantity * objProd.price), 0);
   };
+  
   const totalProductos = () => {
     return cart.reduce(
-      (accumulator, currentProduct) => accumulator + currentProduct.quantity,
-      0
+      (totalProductos, objProd) => totalProductos + objProd.quantity, 0
     );
   };
 
-  const clearCart = () => setCart([]);
+  const vaciarCarrito = () => setCart([]);
 
   const increment = (itemId) => {
-    const newCartItems = cartItems.map((item) => {
+    const newCartItems = cart.map((item) => {
       if (item.id === itemId) {
         return { ...item, quantity: item.quantity + 1 };
       }
       return item;
     });
-    setCartItems(newCartItems);
+    setCart(newCartItems);
   };
 
   const decrement = (itemId) => {
-    const newCartItems = cartItems.map((item) => {
+    const newCartItems = cart.map((item) => {
       if (item.id === itemId && item.quantity > 1) {
         return { ...item, quantity: item.quantity - 1 };
       }
       return item;
     });
-    setCartItems(newCartItems);
+    setCart(newCartItems);
   };
 
   return (
     <CartContext.Provider
       value={{
-        productos,
+        cart,
+        setCart,
         addToCart,
-        removeFromCart,
-        clearCart,
+        removerProducto,
+        vaciarCarrito,
         increment,
         decrement,
         totalPrice,
         totalProductos,
       }}
     >
-      {props.children}
+      {children}
     </CartContext.Provider>
   );
 };
