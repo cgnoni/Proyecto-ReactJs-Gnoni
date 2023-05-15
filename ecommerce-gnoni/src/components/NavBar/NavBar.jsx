@@ -5,12 +5,11 @@ import "./NavBar.css";
 
 
 const NavBar = () => {
-  const brand = url('https://i.postimg.cc/S2q6N5pw/harry-potter-vector-logo.jpg');
   return (
     <header className="header">
       <Link className="navbar-brand" to="/">
         <div className="logo-container">
-          <img src={brand} alt="logo" />
+          <img src="https://i.postimg.cc/S2q6N5pw/harry-potter-vector-logo.jpg" alt="logo" />
         </div>
       </Link>
       <nav className="navbar">
