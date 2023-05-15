@@ -5,7 +5,7 @@ import "./NavBar.css";
 
 
 const NavBar = () => {
-  const brand = "../assets/harry-potter-vector-logo.jpg";
+  const brand = "https://i.postimg.cc/S2q6N5pw/harry-potter-vector-logo.jpg";
   return (
     <header className="header">
       <Link className="navbar-brand" to="/">
