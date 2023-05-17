@@ -4,7 +4,7 @@ import ItemListContainer from "./components/ItemListContainer/ItemListContainer.
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer.jsx";
 import CartContainer from "./components/CartContainer/CartContainer.jsx";
 import ContactForm from "./components/Contact/Contact.jsx";
-import CartProvider from "./context/CartContext.jsx";
+import CartProvider from "./Context/CartContext.jsx";
 import "./App.css";
 
 function App() {
