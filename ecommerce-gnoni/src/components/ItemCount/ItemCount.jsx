@@ -1,5 +1,6 @@
 import { useState } from "react";
-import useCount from "../src/hooks/useCount";
+import useCount from "../../hooks/useCount";
+
 
 const ItemCount = ({ initial = 0, stock = 20, min = 1, onAdd }) => {
   const { contador, increment, decrement, reset } = useCount(1, stock, initial);
