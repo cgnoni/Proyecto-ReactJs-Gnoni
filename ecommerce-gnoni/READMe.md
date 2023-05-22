@@ -1,6 +1,11 @@
 # Proyecto ReactJS de E-commerce de Productos de Harry Potter
 
-¡Bienvenido al repositorio del proyecto de E-commerce de productos de Harry Potter! Este es un ejemplo de un sitio web e-commerce de productos basados en el mágico mundo de Harry Potter, el cual usa ReactJs y Vite.
+Este repositorio contiene el código fuente del proyecto de comercio electrónico desarrollado con ReactJS.
+
+## Descripción
+
+Este proyecto es un ejemplo de una aplicación de e-commerce construida utilizando ReactJS y Vite. Proporciona una interfaz de usuario moderna y fluida que permite a los usuarios explorar y comprar productos.
+
 
 ## Características principales
 
@@ -10,7 +15,16 @@
 
 - **Carrito de compras**: El proyecto ofrece un carrito de compras funcional donde los usuarios pueden agregar productos, ajustar las cantidades y eliminar artículos. El carrito de compras también muestra el subtotal y el total de la compra, lo que brinda una visión clara de los productos seleccionados y su costo acumulado.
 
-- **Dependencias**: El sitio web e-commerce utiliza las dependecias React y Vite para su buen funcionamiento. 
+- **Dependencias**: El sitio web utiliza las dependencias ReactJs y Vite para su buen funcionamiento.
+
+## Tecnologías utilizadas
+
+- **ReactJS**: biblioteca de JavaScript para construir interfaces de usuario.
+- **React Router**: enrutador para manejar la navegación dentro de la aplicación.
+- **Redux**: biblioteca para la administración del estado de la aplicación.
+- **Firebase**: plataforma de desarrollo de aplicaciones en la nube utilizada para el almacenamiento de datos y la autenticación de usuarios.
+- **Bootstrap**: framework CSS para crear una interfaz responsive y atractiva.
+- **HTML5 y CSS3**: lenguajes de marcado y estilos utilizados en la construcción de la aplicación.
 
 ## Configuración del proyecto
 
