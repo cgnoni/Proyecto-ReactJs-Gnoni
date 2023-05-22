@@ -7,10 +7,18 @@ import { Form } from "react-bootstrap";
 import { CartContext } from "../../Context/CartContext";
 
 const CartContainer = () => {
+  const [id, setId] = useState(null);
   const [formOrden, setFormOrden] = useState({
     nombre: "",
     numero: "",
     email: "",
+    emailConfirmacion: "",
+  });
+  const [errores, setErrores] = useState({
+    nombre: "",
+    numero: "",
+    email: "",
+    emailConfirmacion: "",
   });
 
   const {
@@ -22,32 +30,64 @@ const CartContainer = () => {
     totalPrice,
   } = useContext(CartContext);
 
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setFormOrden((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   const handleComprar = (event) => {
     event.preventDefault();
 
-    const orden = {
-      comprador: formOrden,
-      productos: cart.map(({ id, nombre, precio }) => ({ id, nombre, precio })),
-      total: totalPrice(),
-    };
+    const { nombre, numero, email, emailConfirmacion } = formOrden;
+    let errores = {};
 
-    const db = getFirestore();
-    const queryCollection = collection(db, "ordenes");
+    if (nombre.trim() === "") {
+      errores.nombre = "El nombre es requerido";
+    }
 
-    addDoc(queryCollection, orden)
-      .then(({ id }) => console.log({ id }))
-      .catch((resp) => console.log(resp))
-      .finally(() => vaciarCarrito());
-    alert("¡Felicidades por tu compra!");
-  };
+    if (numero.trim() === "") {
+      errores.numero = "El número de contacto es requerido";
+    }
 
-  const handleOnChange = (event) => {
-    console.log(event.target.name);
-    console.log(event.target.value);
-    setFormOrden({
-      ...formOrden,
-      [event.target.name]: event.target.value,
-    });
+    if (email.trim() === "") {
+      errores.email = "El email es requerido";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errores.email = "El email es inválido";
+    }
+
+    if (emailConfirmacion.trim() === "") {
+      errores.emailConfirmacion = "Debe confirmar el email";
+    } else if (emailConfirmacion !== email) {
+      errores.emailConfirmacion = "Los emails no coinciden";
+    }
+
+    if (Object.keys(errores).length === 0) {
+      const orden = {
+        comprador: formOrden,
+        productos: cart.map(({ id, nombre, precio }) => ({
+          id,
+          nombre,
+          precio,
+        })),
+        total: totalPrice(),
+      };
+
+      const db = getFirestore();
+      const queryCollection = collection(db, "ordenes");
+
+      addDoc(queryCollection, orden)
+        .then((resp) => setId(resp.id))
+        .catch((err) => console.log(err))
+        .finally(() => {
+          alert("¡Felicidades por tu compra!");
+          vaciarCarrito();
+        });
+    } else {
+      setErrores(errores);
+    }
   };
 
   return (
@@ -55,7 +95,7 @@ const CartContainer = () => {
       <div>
         <h1>Carrito de compras</h1>
       </div>
-
+      {id && <h2>El id de la orden de la compra es: {id}</h2>}
       {cart.length > 0 ? (
         <div>
           <div>
@@ -103,6 +143,7 @@ const CartContainer = () => {
                 value={formOrden.nombre}
                 required
               />
+              {errores.nombre && <Form.Text>{errores.nombre}</Form.Text>}
             </Form.Group>
             <br />
             <Form.Group>
@@ -114,6 +155,7 @@ const CartContainer = () => {
                 value={formOrden.numero}
                 required
               />
+              {errores.numero && <Form.Text>{errores.numero}</Form.Text>}
             </Form.Group>
             <br />
             <Form.Group>
@@ -125,17 +167,21 @@ const CartContainer = () => {
                 value={formOrden.email}
                 required
               />
+              {errores.email && <Form.Text>{errores.email}</Form.Text>}
             </Form.Group>
             <br />
             <Form.Group>
               <Form.Control
                 type="text"
-                name="email"
+                name="emailConfirmacion"
                 placeholder="Repita su email"
                 onChange={handleOnChange}
-                value={formOrden.email}
+                value={formOrden.emailConfirmacion}
                 required
               />
+              {errores.emailConfirmacion && (
+                <Form.Text>{errores.emailConfirmacion}</Form.Text>
+              )}
             </Form.Group>
             <br />
             <button>Generar Orden</button>
